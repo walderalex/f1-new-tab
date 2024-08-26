@@ -1,0 +1,17 @@
+{
+	"name": "F1 New Tab",
+	"description": "Get the schedule for the next F1 weekend when you open a new tab.",
+	"version": "1.1",
+	"manifest_version": 3,
+	"background": {
+		"service_worker": "build/src/background.js",
+		"type": "module"
+	},
+	"icons": {
+		"128": "Icon.png"
+	},
+	"permissions": ["storage"],
+	"chrome_url_overrides": {
+		"newtab": "newtab/dist/index.html"
+	}
+}

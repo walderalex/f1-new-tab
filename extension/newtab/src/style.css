@@ -1,0 +1,275 @@
+@custom-media --motionOK (prefers-reduced-motion: no-preference);
+@custom-media --dark (prefers-color-scheme: dark);
+@custom-media --light (prefers-color-scheme: light);
+@custom-media --useSelect (pointer: coarse);
+
+:root {
+	--light-bg: white;
+	--light-color: black;
+	--dark-bg: #15151e;
+	--dark-color: white;
+	--bg: var(--light-bg);
+	--color: var(--light-color);
+	--red: #e10600;
+	--grey: #67676d;
+	--Alfa-Romeo: #c92d4b;
+	--Alpha-Tauri: #5e8faa;
+	--Alpine: #2293d1;
+	--Aston-Martin: #358c75;
+	--Ferrari: #f91536;
+	--Haas: #b6babd;
+	--McLaren: #f58020;
+	--Mercedes: #6cd3bf;
+	--Red-Bull: #3671c6;
+	--Williams: #37bedd;
+	--border-radius-large: 25px;
+	--border-radius: 10px;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "Formula1";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/f1-font/Formula1-Regular.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Formula1";
+	font-style: normal;
+	font-weight: 800;
+	src: url("/f1-font/Formula1-Bold.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Formula1";
+	font-style: normal;
+	font-weight: 1000;
+	src: url("/f1-font/Formula1-Black.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Formula1-Wide";
+	font-weight: 400;
+	src: url("/f1-font/Formula1-Wide.woff2") format("woff2");
+}
+
+html,
+body {
+	height: 100%;
+}
+body {
+	font-family: "Formula1", "Titillium Web", sans-serif;
+	background-color: var(--bg);
+	color: var(--color);
+	font-size: 18px;
+}
+
+fieldset {
+	border: none;
+}
+
+legend {
+	text-transform: uppercase;
+	padding-right: 10px;
+}
+
+picture {
+	font-size: 0;
+}
+
+main {
+	width: 100%;
+	max-width: 600px;
+	margin: auto;
+	display: grid;
+	align-content: stretch;
+	grid-template-rows: repeat(2, minmax(0, min-content)) minmax(0, 1fr);
+	grid-template-columns: minmax(0, 1fr);
+	justify-items: center;
+	height: 100%;
+}
+
+section#countdown {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, min-content));
+	gap: 10px;
+	padding: 20px 0;
+}
+
+section#countdown .unit {
+	display: grid;
+	grid-template-rows: auto auto;
+	place-items: center;
+}
+
+section#countdown .unit .duration {
+	font-weight: 1000;
+	font-size: 54px;
+}
+
+section#countdown .dots {
+	font-size: 48px;
+	place-self: center;
+	width: 15px;
+	text-align: center;
+}
+
+section#countdown .dots.live {
+	color: var(--red);
+}
+
+section#countdown .unit .label {
+	font-size: 18px;
+	color: var(--grey);
+	text-transform: uppercase;
+}
+
+section#summary {
+	justify-self: stretch;
+	position: relative;
+}
+
+section#summary fieldset {
+	border-top-right-radius: var(--border-radius-large);
+	border-top: 10px solid var(--red);
+	border-right: 10px solid var(--red);
+}
+
+section#summary legend {
+	color: var(--red);
+}
+
+section#summary .content {
+	padding-right: 30px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+section#summary .content .image {
+	background-image: url("/plus-x2.png");
+	background-size: 8px;
+	background-repeat: repeat;
+	border-radius: var(--border-radius);
+	padding: 0px 10px;
+}
+
+section#summary .content .image img {
+	width: 100%;
+	height: auto;
+}
+
+section#summary .content .text {
+	display: grid;
+	gap: 10px;
+	text-transform: uppercase;
+	align-content: start;
+}
+
+section#summary .content .title {
+	font-weight: 800;
+}
+
+section#schedule {
+	place-self: stretch;
+	font-size: 16px;
+	position: relative;
+}
+
+section#schedule #rh-border--red {
+	position: absolute;
+	top: 0;
+	right: 0px;
+	width: 10px;
+	height: 100%;
+	z-index: 1;
+	background-color: var(--red);
+}
+
+section#schedule fieldset {
+	border-top-right-radius: var(--border-radius-large);
+	border-top: 10px solid var(--grey);
+	border-right: 10px solid var(--grey);
+	height: 100%;
+	z-index: 2;
+	position: relative;
+	background-clip: border-box;
+}
+
+section#schedule legend {
+	color: var(--grey);
+}
+
+section#schedule .content {
+	display: grid;
+	gap: 10px;
+	padding-top: 30px;
+}
+
+section#schedule .content .session {
+	display: grid;
+	grid-template-columns: minmax(0, 150px) minmax(0, 45px) minmax(
+			140px,
+			max-content
+		) minmax(0, max-content);
+	text-transform: uppercase;
+	gap: 40px;
+}
+
+section#schedule .content .session .day {
+	color: var(--grey);
+	place-self: center;
+}
+section#schedule .content .session .time {
+	padding: 5px 10px;
+	border-radius: var(--border-radius);
+	background-color: var(--grey);
+	color: var(--dark-color);
+	text-align: center;
+}
+
+section#schedule .content .session .status {
+	padding: 5px 10px;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--grey);
+	color: var(--grey);
+}
+
+section#schedule .content .session .status.live {
+	color: var(--red);
+	border: 1px solid var(--red);
+}
+
+@media (--dark) {
+	:root {
+		--bg: var(--dark-bg);
+		--color: var(--dark-color);
+	}
+	section#summary .content .image {
+		background-image: url("/plus-white-x2.png");
+	}
+}
+
+@media (--light) {
+	:root {
+		--bg: var(--light-bg);
+		--color: var(--light-color);
+	}
+	section#summary .content .image {
+		background-image: url("/plus-x2.png");
+	}
+}
+
+@media (--motionOK) {
+	body {
+		transition: color 0.3s ease, background-color 0.3s ease;
+		scroll-behavior: smooth;
+	}
+}

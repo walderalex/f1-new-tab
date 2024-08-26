@@ -1,0 +1,25 @@
+{
+	"name": "new-ui",
+	"private": true,
+	"version": "0.0.0",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"watch": "vite build --watch",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@types/luxon": "^2.3.2",
+		"postcss-custom-media": "^8.0.2",
+		"typescript": "^4.5.4",
+		"vite": "^2.9.9"
+	},
+	"postcss": {
+		"plugins": {
+			"postcss-custom-media": {}
+		}
+	},
+	"dependencies": {
+		"luxon": "^3.0.1"
+	}
+}

@@ -1,0 +1,61 @@
+{
+	"path": "/content/fom-website/en/racing/2022/France.html",
+	"linkText": "FORMULA 1 LENOVO GRAND PRIX DE FRANCE 2022",
+	"meetingKey": 1116,
+	"meetingNumber": 12,
+	"image": "/content/dam/fom-website/races/2022/French_Grand_Prix.png",
+	"startAndEndDate": "July 22-24",
+	"driverOrTeamOrRaceSecondaryNavigation": false,
+	"timetables": [
+		{
+			"state": "upcoming",
+			"session": "p1",
+			"gmtOffset": "+02:00",
+			"description": "Practice 1",
+			"startTime": "2022-07-15T07:00:00",
+			"endTime": "2022-07-15T08:00:00"
+		},
+		{
+			"state": "upcoming",
+			"session": "p2",
+			"gmtOffset": "+02:00",
+			"description": "Practice 2",
+			"startTime": "2022-07-15T09:00:00",
+			"endTime": "2022-07-15T10:00:00"
+		},
+		{
+			"state": "upcoming",
+			"session": "p3",
+			"gmtOffset": "+02:00",
+			"description": "Practice 3",
+			"startTime": "2022-07-15T11:00:00",
+			"endTime": "2022-07-15T11:15:00"
+		},
+		{
+			"state": "upcoming",
+			"session": "q",
+			"gmtOffset": "+02:00",
+			"description": "Qualifying",
+			"startTime": "2022-07-15T11:20:00",
+			"endTime": "2022-07-15T11:30:00"
+		},
+		{
+			"state": "upcoming",
+			"session": "r",
+			"gmtOffset": "+02:00",
+			"description": "Race",
+			"startTime": "2022-07-15T14:00:00",
+			"endTime": "2022-07-15T14:30:00"
+		}
+	],
+	"meetingCountryName": "France",
+	"meetingStartDate": "2022-07-22T12:00:00.000Z",
+	"meetingOfficialName": "FORMULA 1 LENOVO GRAND PRIX DE FRANCE 2022",
+	"meetingEndDate": "2022-07-24T15:00:00.000Z",
+	"circuitImage": {
+		"light": "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/France.png.transform/2col/image.png",
+		"dark": "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/France%20carbon.png.transform/2col/image.png",
+		"fallback": "https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/France.png",
+		"title": "France.png"
+	}
+}

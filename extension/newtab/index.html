@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>New Tab</title>
+	</head>
+	<body>
+		<main>
+			<section id="countdown">
+				<div class="unit">
+					<div class="duration" id="days"></div>
+					<div class="label" id="major">days</div>
+				</div>
+				<div class="dots"></div>
+				<div class="unit">
+					<div class="duration" id="hours"></div>
+					<div class="label" id="minor">hours</div>
+				</div>
+				<div class="dots"></div>
+				<div class="unit">
+					<div class="duration" id="mins"></div>
+					<div class="label" id="minow">mins</div>
+				</div>
+			</section>
+			<section id="summary">
+				<fieldset>
+					<legend id="round">Round 12 - up next</legend>
+					<div class="content">
+						<div class="text">
+							<div class="country" id="country">france</div>
+							<div class="title" id="title">
+								Formula 1 lenevo grand prix de france 2022
+							</div>
+							<div class="dates" id="dates">22-24 July</div>
+						</div>
+						<div class="image">
+							<picture>
+								<source media="(prefers-color-scheme:dark)" id="dark-img" />
+								<img id="light-img" width="4" height="3" alt="Track image" />
+							</picture>
+						</div>
+					</div>
+				</fieldset>
+			</section>
+			<section id="schedule">
+				<fieldset>
+					<legend>schedule</legend>
+					<div class="content" id="sessions"></div>
+				</fieldset>
+
+				<div id="rh-border--red"></div>
+			</section>
+		</main>
+		<script type="module" src="/src/main.ts"></script>
+	</body>
+</html>
