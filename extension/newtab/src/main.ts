@@ -58,9 +58,10 @@ const animationInterval = (
 ) => {
 	// Prefer currentTime, as it'll better sync animtions queued in the
 	// same frame, but if it isn't supported, performance.now() is fine.
-	const start = document.timeline
-		? document.timeline.currentTime!
-		: performance.now();
+	const start =
+		document.timeline?.currentTime != null
+			? Number(document.timeline.currentTime)
+			: performance.now();
 
 	function frame(time: number) {
 		if (signal.aborted) return;

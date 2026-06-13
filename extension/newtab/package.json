@@ -9,17 +9,14 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@types/luxon": "^2.3.2",
-		"postcss-custom-media": "^8.0.2",
-		"typescript": "^4.5.4",
-		"vite": "^2.9.9"
+		"@types/chrome": "^0.1.43",
+		"postcss-custom-media": "^12.0.1",
+		"typescript": "^6.0.0",
+		"vite": "^8.0.0"
 	},
 	"postcss": {
 		"plugins": {
 			"postcss-custom-media": {}
 		}
-	},
-	"dependencies": {
-		"luxon": "^3.0.1"
 	}
 }

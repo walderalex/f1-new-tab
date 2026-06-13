@@ -4,7 +4,7 @@
 	"version": "1.1",
 	"manifest_version": 3,
 	"background": {
-		"service_worker": "build/src/background.js",
+		"service_worker": "newtab/dist/background.js",
 		"type": "module"
 	},
 	"icons": {

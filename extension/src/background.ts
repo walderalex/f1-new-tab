@@ -1,59 +1,35 @@
-interface F1Data {
-	path: string;
-	linkText: string;
-	meetingKey: number;
-	meetingNumber: number;
-	image: string;
-	startAndEndDate: string;
-	driverOrTeamOrRaceSecondaryNavigation: boolean;
-	timetables: Session[];
-	meetingCountryName: string;
-	meetingStartDate: string;
-	meetingOfficialName: string;
-	meetingEndDate: string;
-	circuitImage: {
-		light: string;
-		dark: string;
-		fallback: string;
-		title: string;
-	};
-}
+/// <reference types="vite/client" />
 
-interface Session<T = string> {
-	state: string;
-	session: ("q" | "r" | "p1" | "p2" | "p3") | string;
-	gmtOffset: string;
-	description: string;
-	endTime: string;
-	startTime: T;
-}
+const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
+const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
 
-chrome.runtime.onMessage.addListener(function (message, sender, reply) {
-	if (message == "initial") {
+chrome.runtime.onMessage.addListener(function (message, _sender, reply) {
+	if (message === "initial") {
 		chrome.storage.local.get(function (saved) {
-			const savedData = saved.f1;
-			if (savedData) {
-				console.log(`from saved`);
-				reply(savedData);
+			const data = saved.f1;
+			const cachedAt: number | undefined = saved.f1CachedAt;
+			const expired = !cachedAt || Date.now() - cachedAt > CACHE_TTL_MS;
+			if (data && !expired) {
+				reply(data);
 			} else {
-				console.log(`from api`);
-				fetchFromApi(reply);
+				fetchAndCache(reply);
 			}
 		});
-	} else if (message == "refresh") {
-		fetchFromApi(reply);
+	} else if (message === "refresh") {
+		fetchAndCache(reply);
 	} else {
 		reply(null);
 	}
 	return true;
 });
 
-function fetchFromApi(reply: (message: any) => void) {
-	fetch(`https://us-central1-als-site-test.cloudfunctions.net/schedule`)
+function fetchAndCache(reply: (message: unknown) => void) {
+	fetch(API_URL)
 		.then((resp) => resp.json())
 		.then((data) => {
-			chrome.storage.local.set({ f1: data }, function () {
-				reply(data);
-			});
-		});
+			chrome.storage.local.set({ f1: data, f1CachedAt: Date.now() }, () =>
+				reply(data)
+			);
+		})
+		.catch(() => reply(null));
 }
