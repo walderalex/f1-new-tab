@@ -5,12 +5,13 @@ Chrome extension (Manifest V3). Replaces the new tab page with the next F1 race 
 ## Structure
 
 ```
-src/background.ts    Service worker — caches API responses, handles refresh logic
-newtab/              Vite app — the new tab UI
-manifest.json        Extension manifest
+newtab/src/background.ts    Service worker — caches API responses, handles refresh logic
+newtab/src/main.ts          New tab UI entry point
+newtab/                     Vite app — built into newtab/dist/
+manifest.json               Extension manifest
 ```
 
-Both `background.ts` and the newtab are built together by Vite into `newtab/dist/`.
+Both `background.ts` and the newtab UI are built together by Vite into `newtab/dist/`.
 
 ## Setup
 
@@ -64,3 +65,12 @@ VITE_API_URL=https://api.example.com npm run build
 2. Go to `chrome://extensions`
 3. Enable **Developer mode**
 4. Click **Load unpacked** and select the `extension/` directory
+
+## Publishing to the Chrome Web Store
+
+```bash
+# from extension/
+npm run package
+```
+
+Builds and produces `extension.zip` containing only the files Chrome needs (`manifest.json`, `Icon.png`, `newtab/dist/`). Upload that zip to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).

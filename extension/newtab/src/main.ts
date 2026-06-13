@@ -2,22 +2,23 @@ import "./style.css";
 // import templateData from "./race data template.json";
 import { fetchData } from "./data";
 export interface F1Data {
-	path: string;
-	linkText: string;
-	meetingKey: number;
-	meetingNumber: number;
-	image: string;
-	startAndEndDate: string;
-	driverOrTeamOrRaceSecondaryNavigation: boolean;
-	timetables: Session[];
+	meetingName: string;
+	meetingLocation: string;
 	meetingCountryName: string;
-	meetingStartDate: string;
+	meetingCountryCode: string;
 	meetingOfficialName: string;
+	meetingTimezone: string;
+	url: string;
+	isTestEvent: boolean;
+	roundText: string;
+	circuitShortName: string;
+	meetingStartDate: string;
 	meetingEndDate: string;
+	meetingNumber: number;
+	startAndEndDate: string;
+	timetables: Session[];
 	circuitImage: {
-		light: string;
-		dark: string;
-		fallback: string;
+		url: string;
 		title: string;
 	};
 }
@@ -265,9 +266,9 @@ const main = async () => {
 	countryEl.textContent = data.meetingCountryName;
 	titleEl.textContent = data.meetingOfficialName;
 	eventDatesEl.textContent = data.startAndEndDate;
-	lightImageEl.src = data.circuitImage.dark;
+	lightImageEl.src = data.circuitImage.url;
 	lightImageEl.alt = data.circuitImage.title;
-	darkImageEl.srcset = data.circuitImage.light;
+	darkImageEl.srcset = data.circuitImage.url;
 	renderSessions();
 	countdownController = new AbortController();
 	let lastTimeToNext = updateCountdown(true, 0);

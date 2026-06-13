@@ -6,7 +6,7 @@ Express server that scrapes the F1 website to return data for the current or nex
 
 1. Fetches `formula1.com/en/racing/{year}.html` and extracts the session API key embedded in the page
 2. Calls `api.formula1.com/v1/event-tracker` with that key
-3. Merges the meeting metadata (round number, circuit images) with the session timetable and returns it as JSON
+3. Shapes the response — computes `meetingNumber`, `startAndEndDate`, and `circuitImage.url` — and returns it as JSON
 
 Single endpoint: `GET /` — returns the active or next race event.
 
@@ -14,7 +14,7 @@ Single endpoint: `GET /` — returns the active or next race event.
 
 ```bash
 npm install
-npm run dev       # build + start on port 3000
+npm run dev       # hot-reloading dev server on port 3000
 npm test          # run tests
 ```
 

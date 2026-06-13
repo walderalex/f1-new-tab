@@ -1,6 +1,6 @@
 import getNextEvent from "./f1";
-import * as express from "express";
-import * as cors from "cors";
+import express from "express";
+import cors from "cors";
 
 export const app = express();
 app.use(cors({ origin: true }));

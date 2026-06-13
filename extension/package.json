@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "npm run build --prefix newtab",
-    "dev": "npm run dev --prefix newtab"
+    "dev": "npm run dev --prefix newtab",
+    "package": "npm run build && zip -FSr extension.zip manifest.json Icon.png newtab/dist/"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.191"

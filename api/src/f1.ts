@@ -1,14 +1,57 @@
 import axios from "axios";
+import { writeFileSync } from "fs";
 
-const main = async () => {
+interface Session {
+	session: string;
+	shortName: string;
+	description: string;
+	startTime: string;
+	endTime: string;
+	gmtOffset: string;
+	state: string;
+	sessionType: string;
+	sessionNumber: number;
+	meetingSessionKey: number;
+	timezone: string;
+}
+
+export interface ActiveRace {
+	meetingName: string;
+	meetingLocation: string;
+	meetingCountryName: string;
+	meetingCountryCode: string;
+	meetingOfficialName: string;
+	meetingTimezone: string;
+	url: string;
+	isTestEvent: boolean;
+	roundText: string;
+	circuitShortName: string;
+	meetingStartDate: string;
+	meetingEndDate: string;
+	meetingNumber: number;
+	startAndEndDate: string;
+	timetables: Session[];
+	circuitImage: {
+		url: string;
+		title: string;
+	};
+}
+
+const formatDateRange = (start: string, end: string) => {
+	const s = new Date(start);
+	const e = new Date(end);
+	const month = s.toLocaleString("en", { month: "short" });
+	return `${s.getUTCDate()} - ${e.getUTCDate()} ${month}`;
+};
+
+const main = async (): Promise<ActiveRace> => {
 	try {
 		const year = new Date().getFullYear();
 		const schedulePage = (
 			await axios.get(`https://www.formula1.com/en/racing/${year}.html`)
 		).data;
-		const apikey = `${
-			schedulePage.match(/PUBLIC_GLOBAL_EVENTTRACKER_APIKEY\\"\:\\"([^\\]+)/)[1]
-		}`;
+		const apikey =
+			schedulePage.match(/PUBLIC_GLOBAL_EVENTTRACKER_APIKEY\\"\:\\"([^\\]+)/)[1];
 		const eventDataResponse = await axios.get(
 			"https://api.formula1.com/v1/event-tracker",
 			{
@@ -16,41 +59,22 @@ const main = async () => {
 					Apikey: apikey,
 					locale: "en",
 				},
-			}
+			},
 		);
+		writeFileSync("event-data.json", JSON.stringify(eventDataResponse.data));
 
-		const meetings = /\{\\"meetingName\\":[^}]+\}/g;
-		const services: IEventData = eventDataResponse.data;
-		let meeting;
-		while (!!(meeting = meetings.exec(schedulePage))) {
-			const meetText = meeting[0]
-				.replace(/\\/g, "")
-				.replace(/"\]\)[^\(]+\(\[\d+,"/, "");
-			const meet = JSON.parse(meetText);
-			if (meet.meetingKey === services.fomRaceId) {
-				meeting = meet;
-				break;
-			}
-		}
-		const darkImageUrlTemplate = `https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/${encodeURIComponent(
-			services.race.meetingCountryName
-		)}%20carbon.png.transform/2col/image.png`;
-		const lightImageUrlTemplate = `https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Track%20icons%204x3/${encodeURIComponent(
-			services.race.meetingCountryName
-		)}.png.transform/2col/image.png`;
-		const activeRace = {
-			...meeting,
-			meetingNumber: Number(meeting.roundText.split(" ")[1]),
-			timetables: services.seasonContext.timetables,
-			...services.race,
+		const { race, seasonContext, circuitImage } = eventDataResponse.data;
+
+		return {
+			...race,
+			meetingNumber: Number((race.roundText as string).replace("R", "")),
+			timetables: seasonContext.timetables,
+			startAndEndDate: formatDateRange(race.meetingStartDate, race.meetingEndDate),
 			circuitImage: {
-				light: lightImageUrlTemplate,
-				dark: darkImageUrlTemplate,
-				fallback: services.circuitSmallImage.url,
-				title: services.circuitSmallImage.title,
+				url: `https://media.formula1.com/image/upload/${circuitImage.public_id}`,
+				title: race.circuitShortName,
 			},
 		};
-		return activeRace;
 	} catch (e) {
 		const error = e as any;
 		console.error(error);

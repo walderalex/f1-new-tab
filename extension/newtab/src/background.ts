@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000;
 
@@ -7,7 +5,7 @@ chrome.runtime.onMessage.addListener(function (message, _sender, reply) {
 	if (message === "initial") {
 		chrome.storage.local.get(function (saved) {
 			const data = saved.f1;
-			const cachedAt: number | undefined = saved.f1CachedAt;
+			const cachedAt = saved.f1CachedAt as number | undefined;
 			const expired = !cachedAt || Date.now() - cachedAt > CACHE_TTL_MS;
 			if (data && !expired) {
 				reply(data);
