@@ -8,42 +8,34 @@ Express server that scrapes the F1 website to return data for the current or nex
 2. Calls `api.formula1.com/v1/event-tracker` with that key
 3. Shapes the response — computes `meetingNumber`, `startAndEndDate`, and `circuitImage.url` — and returns it as JSON
 
-Single endpoint: `GET /` — returns the active or next race event.
+Single endpoint: `GET /api` — returns the active or next race event.
 
 ## Development
 
 ```bash
 npm install
-npm run dev       # hot-reloading dev server on port 3000
-npm test          # run tests
+npm run dev    # hot-reloading dev server on port 3000
+npm test       # run tests
 ```
 
-## Docker
+Or from the repo root: `npm run dev` starts the API and UI together.
+
+## Deployment
+
+The full stack (API + UI) runs via Docker Compose from the repo root:
 
 ```bash
-docker compose up -d
+npm run docker:up
 ```
 
-Runs on port 3000. To change the port:
-
-```yaml
-# docker-compose.yml
-ports:
-  - "4000:3000"
-```
-
-Or set `PORT` as an environment variable when running directly:
-
-```bash
-PORT=4000 npm start
-```
+Runs on port 3000. To change the port, update the `ports` mapping in `docker-compose.yml`.
 
 ## Nginx
 
-Proxy pass to the container port:
+Proxy pass to the container:
 
 ```nginx
-location /f1/ {
+location / {
     proxy_pass http://localhost:3000/;
 }
 ```

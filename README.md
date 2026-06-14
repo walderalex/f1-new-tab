@@ -1,19 +1,41 @@
 # F1 New Tab
 
-A Chrome extension that replaces the new tab page with the next F1 race weekend — showing the schedule, a countdown, and the circuit image.
+A Chrome extension that replaces the new tab page with the next F1 race weekend — showing the schedule, a countdown, and the circuit image. Also deployable as a standalone web app.
 
 ## Structure
 
 ```
-extension/   Chrome extension (Manifest V3)
-api/         Self-hosted API server (Node/Express)
+api/         Node/Express server — fetches live race data from F1
+ui/          Vite app — the new tab UI (builds for extension or web)
+extension/   Chrome extension packaging — manifest, icons, promo assets
 ```
 
-The extension fetches race data from the API. The background service worker caches responses in `chrome.storage.local` for up to 12 hours, refreshing automatically when the next session starts.
+## Development
 
-## Quick start
+Run the API and UI dev servers together:
 
-See the README in each directory:
+```bash
+npm run dev
+```
 
-- [api/](api/) — run the API locally or via Docker
-- [extension/](extension/) — build and load the extension
+The UI dev server proxies `/api` to `http://localhost:3000`, so you can work on the UI in a browser without an extension.
+
+## Chrome extension
+
+Build and package for the Chrome Web Store:
+
+```bash
+npm run build:extension
+```
+
+Produces `extension/extension.zip`. See [extension/](extension/) for loading unpacked in Chrome.
+
+## Web app (Docker)
+
+Build and run the full stack:
+
+```bash
+npm run docker:up
+```
+
+The API serves the built UI as static files on port 3000.

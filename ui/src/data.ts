@@ -8,7 +8,7 @@ export const fetchData = async (forceRefresh = false): Promise<F1Data> => {
 		return data as F1Data;
 	} catch {
 		const resp = await fetch(
-			import.meta.env.VITE_API_URL ?? "http://localhost:3000"
+			import.meta.env.VITE_API_URL ?? "/api"
 		);
 		return resp.json();
 	}

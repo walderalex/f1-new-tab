@@ -4,9 +4,12 @@
 	"version": "0.0.0",
 	"scripts": {
 		"dev": "vite",
+		"dev:web": "vite --config vite.web.config.js",
 		"build": "tsc && vite build",
+		"build:web": "tsc && vite build --config vite.web.config.js",
 		"watch": "vite build --watch",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"preview:web": "vite preview --config vite.web.config.js"
 	},
 	"devDependencies": {
 		"@types/chrome": "^0.1.43",

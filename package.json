@@ -1,0 +1,9 @@
+{
+	"name": "f1-new-tab",
+	"private": true,
+	"scripts": {
+		"dev": "trap 'kill 0' EXIT; npm run dev --prefix api & npm run dev:web --prefix ui; wait",
+		"build:extension": "npm run package --prefix extension",
+		"docker:up": "docker compose up --build"
+	}
+}

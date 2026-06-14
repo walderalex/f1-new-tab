@@ -4,7 +4,7 @@
 	"version": "1.2.0",
 	"manifest_version": 3,
 	"background": {
-		"service_worker": "newtab/dist/background.js",
+		"service_worker": "dist/background.js",
 		"type": "module"
 	},
 	"icons": {
@@ -12,6 +12,6 @@
 	},
 	"permissions": ["storage"],
 	"chrome_url_overrides": {
-		"newtab": "newtab/dist/index.html"
+		"newtab": "dist/index.html"
 	}
 }

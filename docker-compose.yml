@@ -1,0 +1,14 @@
+services:
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+
+  f1-api:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis

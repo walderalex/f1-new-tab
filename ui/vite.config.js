@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 
 export default defineConfig({
-	base: "/newtab/dist/",
+	base: "./",
 	build: {
 		rollupOptions: {
 			input: {
