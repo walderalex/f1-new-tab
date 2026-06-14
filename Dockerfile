@@ -1,4 +1,4 @@
-FROM node:18-alpine AS web-builder
+FROM node:20-alpine AS web-builder
 WORKDIR /web
 COPY ui/package*.json ./
 RUN npm ci
