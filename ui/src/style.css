@@ -93,6 +93,7 @@ main {
 	grid-template-columns: minmax(0, 1fr);
 	justify-items: center;
 	height: 100%;
+	padding: 0 12px;
 }
 
 section#countdown {
@@ -223,6 +224,13 @@ section#schedule .content .session {
 	gap: 40px;
 }
 
+section#schedule .content .session .name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	align-self: center;
+}
+
 section#schedule .content .session .day {
 	color: var(--grey);
 	place-self: center;
@@ -271,5 +279,65 @@ section#schedule .content .session .status.live {
 	body {
 		transition: color 0.3s ease, background-color 0.3s ease;
 		scroll-behavior: smooth;
+	}
+}
+
+@media (max-width: 600px) {
+	body {
+		font-size: 16px;
+	}
+
+	main {
+		padding: 0 8px;
+	}
+
+	section#countdown {
+		gap: 6px;
+	}
+
+	section#countdown .unit .duration {
+		font-size: 36px;
+	}
+
+	section#countdown .dots {
+		font-size: 32px;
+		width: 10px;
+	}
+
+	section#countdown .unit .label {
+		font-size: 14px;
+	}
+
+	section#summary .content {
+		padding-right: 15px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		gap: 15px;
+	}
+
+	section#schedule .content .session {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 30px) minmax(0, max-content) minmax(
+				0,
+				max-content
+			);
+		gap: 10px;
+		font-size: 13px;
+	}
+
+	section#schedule .content .session .time,
+	section#schedule .content .session .status {
+		padding: 4px 8px;
+		white-space: nowrap;
+	}
+}
+
+@media (max-width: 380px) {
+	section#summary .content {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	section#summary .content .image {
+		max-width: 140px;
+		justify-self: start;
 	}
 }

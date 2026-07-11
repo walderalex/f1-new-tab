@@ -32,7 +32,8 @@ export interface ActiveRace {
 	startAndEndDate: string;
 	timetables: Session[];
 	circuitImage: {
-		url: string;
+		light: string;
+		dark: string;
 		title: string;
 	};
 }
@@ -65,13 +66,28 @@ const main = async (): Promise<ActiveRace> => {
 
 		const { race, seasonContext, circuitImage } = eventDataResponse.data;
 
+		// The API only returns one outline colour (usually "blackoutline"), but
+		// Formula1's media CDN hosts a matching "whiteoutline" asset under the
+		// same public_id for every circuit, so we derive both from it.
+		const buildImageUrl = (publicId: string) =>
+			`https://media.formula1.com/image/upload/${publicId}`;
+		const lightPublicId = (circuitImage.public_id as string).replace(
+			"whiteoutline",
+			"blackoutline",
+		);
+		const darkPublicId = (circuitImage.public_id as string).replace(
+			"blackoutline",
+			"whiteoutline",
+		);
+
 		return {
 			...race,
 			meetingNumber: Number((race.roundText as string).replace("R", "")),
 			timetables: seasonContext.timetables,
 			startAndEndDate: formatDateRange(race.meetingStartDate, race.meetingEndDate),
 			circuitImage: {
-				url: `https://media.formula1.com/image/upload/${circuitImage.public_id}`,
+				light: buildImageUrl(lightPublicId),
+				dark: buildImageUrl(darkPublicId),
 				title: race.circuitShortName,
 			},
 		};

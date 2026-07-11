@@ -5,7 +5,7 @@ interface IEventData {
 	updatedAt: string;
 	fomRaceId: string;
 	brandColourHexadecimal: string;
-	circuitSmallImage: ICircuitSmallImage;
+	circuitImage: ICircuitImage;
 	links: any[];
 	seasonContext: ISeasonContext;
 	raceResults: any[];
@@ -13,14 +13,8 @@ interface IEventData {
 	seasonYearImage: string;
 	sessionLinkSets: ISessionLinkSets;
 }
-interface ICircuitSmallImage {
-	title: string;
-	path: string;
-	url: string;
+interface ICircuitImage {
 	public_id: string;
-	raw_transformation: string;
-	width: number;
-	height: number;
 }
 interface ISeasonContext {
 	id: string;
@@ -61,11 +55,14 @@ interface ITimetablesItem {
 	sessionNumber: number;
 }
 interface IRace {
+	meetingName: string;
 	meetingCountryName: string;
 	meetingStartDate: string;
 	meetingOfficialName: string;
 	meetingEndDate: string;
 	url: string;
+	roundText: string;
+	circuitShortName: string;
 }
 interface ISessionLinkSets {
 	replayLinks: IReplayLinksItem[];

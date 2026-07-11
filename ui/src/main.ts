@@ -18,7 +18,8 @@ export interface F1Data {
 	startAndEndDate: string;
 	timetables: Session[];
 	circuitImage: {
-		url: string;
+		light: string;
+		dark: string;
 		title: string;
 	};
 }
@@ -266,9 +267,9 @@ const main = async () => {
 	countryEl.textContent = data.meetingCountryName;
 	titleEl.textContent = data.meetingOfficialName;
 	eventDatesEl.textContent = data.startAndEndDate;
-	lightImageEl.src = data.circuitImage.url;
+	lightImageEl.src = data.circuitImage.light;
 	lightImageEl.alt = data.circuitImage.title;
-	darkImageEl.srcset = data.circuitImage.url;
+	darkImageEl.srcset = data.circuitImage.dark;
 	renderSessions();
 	countdownController = new AbortController();
 	let lastTimeToNext = updateCountdown(true, 0);

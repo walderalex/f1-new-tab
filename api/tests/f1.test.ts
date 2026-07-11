@@ -16,14 +16,8 @@ const mockEventData: IEventData = {
 	updatedAt: "2024-01-01",
 	fomRaceId: RACE_ID,
 	brandColourHexadecimal: "#e8002d",
-	circuitSmallImage: {
-		title: "Monaco Circuit",
-		path: "/path/to/image",
-		url: "https://example.com/circuit.png",
-		public_id: "circuit",
-		raw_transformation: "",
-		width: 400,
-		height: 300,
+	circuitImage: {
+		public_id: "common/f1/2024/track/2024trackmonacoblackoutline",
 	},
 	links: [],
 	seasonContext: {
@@ -66,11 +60,14 @@ const mockEventData: IEventData = {
 	},
 	raceResults: [],
 	race: {
+		meetingName: "Monaco Grand Prix",
 		meetingCountryName: "Monaco",
 		meetingStartDate: "2024-05-23",
 		meetingOfficialName: "Formula 1 Grand Prix de Monaco 2024",
 		meetingEndDate: "2024-05-26",
 		url: "https://www.formula1.com/en/racing/2024/Monaco",
+		roundText: "R8",
+		circuitShortName: "Monaco",
 	},
 	seasonYearImage: "",
 	sessionLinkSets: { replayLinks: [] },
@@ -105,10 +102,9 @@ test("returns the correct shape", async () => {
 		meetingCountryName: "Monaco",
 		meetingOfficialName: "Formula 1 Grand Prix de Monaco 2024",
 		circuitImage: {
-			light: expect.stringContaining("Monaco"),
-			dark: expect.stringContaining("Monaco"),
-			fallback: "https://example.com/circuit.png",
-			title: "Monaco Circuit",
+			light: "https://media.formula1.com/image/upload/common/f1/2024/track/2024trackmonacoblackoutline",
+			dark: "https://media.formula1.com/image/upload/common/f1/2024/track/2024trackmonacowhiteoutline",
+			title: "Monaco",
 		},
 		timetables: mockEventData.seasonContext.timetables,
 	});
