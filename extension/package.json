@@ -1,10 +1,10 @@
 {
 	"name": "f1-new-tab-extension",
-	"version": "1.2.0",
+	"version": "1.2.3",
 	"private": true,
 	"scripts": {
 		"build:ui": "npm run build --prefix ../ui",
-		"package": "npm run build:ui && cp -r ../ui/dist ./dist && zip -FSr extension.zip manifest.json Icon.png dist/"
+		"package": "npm run build:ui && rm -rf dist extension.zip && cp -r ../ui/dist ./dist && zip -FSr extension.zip manifest.json Icon.png dist/"
 	},
 	"devDependencies": {
 		"@types/chrome": "^0.0.191"
